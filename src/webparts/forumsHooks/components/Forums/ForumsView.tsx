@@ -10,7 +10,7 @@ import Forums from './Forums';
 import SidePanel from '../shared/SidePanel';
 import ForumsForm from './ForumsForm';
 import { IForum } from '../../../../Reducers/reducers';
-import { useListsService, useDispatch, useFormState, useCurrentUser, useFormData } from '../../../../Hooks'
+import { useListsService, useDispatch, useFormState, useCurrentUser, useFormData, useLinkState } from '../../../../Hooks'
 
 interface IForumsView {
     location: any
@@ -18,6 +18,7 @@ interface IForumsView {
 
 const ForumsView: React.FC<IForumsView> = ({ location: { state } }) => {
     const [isOpen, setIsOpen] = useState(false)
+    const linkState = useLinkState(isOpen, state)
 
     const dispatch = useDispatch()
     const user = useCurrentUser()
@@ -27,7 +28,7 @@ const ForumsView: React.FC<IForumsView> = ({ location: { state } }) => {
     const formState = useFormState(formData)
 
     const { data: forums, loading, error, getListItems, addListItem, updateListItem, deleteForum } =
-        useListsService(fh_forums, state)
+        useListsService(fh_forums, linkState)
 
     useEffect(getListItems, [getListItems])
 

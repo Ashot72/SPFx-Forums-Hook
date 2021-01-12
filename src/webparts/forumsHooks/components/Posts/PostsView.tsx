@@ -40,8 +40,9 @@ const PostsView: React.FC<IPostsView> = ({ match: { params: { fid, tid } } }) =>
 
     const filter = `TopicId eq ${topicId} and Id gt ${lastPostIdRef.current}`
 
-    const getFilter = () => filter
-    const isLoading = () => loading
+    const getFilter = () => {
+        return filter
+    }
 
     useEffect(() => getForumListItem(forumId), [forumId, getForumListItem])
     useEffect(() => getTopicListItem(topicId), [topicId, getTopicListItem])
@@ -81,10 +82,8 @@ const PostsView: React.FC<IPostsView> = ({ match: { params: { fid, tid } } }) =>
         let interval
         if (!viewMore) {
             interval = setInterval(() => {
-                if (!isLoading()) {
-                    getNewListItems(fh_posts, getFilter())
-                }
-            }, 5000)
+                getNewListItems(fh_posts, `TopicId eq ${topicId} and Id gt ${lastPostIdRef.current}`)
+            }, 10000)
         }
 
         return () => {

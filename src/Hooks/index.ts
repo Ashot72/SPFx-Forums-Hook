@@ -4,6 +4,7 @@ import { useListsService } from "./useListsService"
 import useFormState from "./useFormState"
 import useForumsState from "./useForumsState"
 import useTopicsState from "./useTopicsState"
+import useLinkState from "./useLinkState"
 import usePostsState from "./useTopicsState"
 import useCurrentUser from "./useCurrentUser"
 import useFormData from "./useFormData"
@@ -16,6 +17,7 @@ export {
     useFormState,
     useForumsState,
     useTopicsState,
+    useLinkState,
     usePostsState,
     useCurrentUser,
     useFormData,

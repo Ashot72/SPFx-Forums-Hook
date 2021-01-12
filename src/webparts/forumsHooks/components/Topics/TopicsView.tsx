@@ -12,7 +12,7 @@ import TopicsForm from './TopicsForm';
 import { ITopic } from '../../../../Reducers/reducers';
 import { IPost } from '../../../../Reducers/postReducer';
 import Navigation from '../shared/Navigation';
-import { useListsService, useFormState, useDispatch, useCurrentUser, useFormData } from '../../../../Hooks'
+import { useListsService, useFormState, useDispatch, useCurrentUser, useLinkState, useFormData } from '../../../../Hooks'
 
 interface ITopicsView {
     location: any
@@ -21,6 +21,7 @@ interface ITopicsView {
 
 const TopicsView: React.FC<ITopicsView> = ({ location: { state }, match: { params: { fid } } }) => {
     const [isOpen, setIsOpen] = useState(false)
+    const linkState = useLinkState(isOpen, state)
 
     const dispatch = useDispatch()
     const user = useCurrentUser()
@@ -31,7 +32,7 @@ const TopicsView: React.FC<ITopicsView> = ({ location: { state }, match: { param
 
     const { data: forum, getlistItem } = useListsService(fh_forums)
     const { data: topics, loading, error, getListItems, updateListItem, deleteTopic, addTopic }
-        = useListsService(fh_topics, state)
+        = useListsService(fh_topics, linkState)
 
     const forumId = +fid
     const forumName = forum.length > 0 ? forum[0].Title : ''
