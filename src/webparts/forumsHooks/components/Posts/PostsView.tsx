@@ -40,10 +40,6 @@ const PostsView: React.FC<IPostsView> = ({ match: { params: { fid, tid } } }) =>
 
     const filter = `TopicId eq ${topicId} and Id gt ${lastPostIdRef.current}`
 
-    const getFilter = () => {
-        return filter
-    }
-
     useEffect(() => getForumListItem(forumId), [forumId, getForumListItem])
     useEffect(() => getTopicListItem(topicId), [topicId, getTopicListItem])
     useEffect(() => getListItems(fh_posts, filter, limit), [getListItems])
